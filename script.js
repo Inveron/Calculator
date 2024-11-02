@@ -35,11 +35,13 @@ function operate(operator, number1, number2) {
 
     return result;
 }
-//loops through the array and calls the operate() function to do the math
+
 function getSolution() {
     let input = getInput();
-    let result = 0;
-    let count = 0;
+    
+    let numbers = [];
+    let operands = [];
+    //Separates the array into numbers and operators
     for (let i = 0; i < input.length; i++) {
         
         if (input[i] === "+" ||
@@ -47,27 +49,27 @@ function getSolution() {
             input[i] === "/" ||
             input[i] === "X"
         ) {
-            let num1 = Number(input[i-1]);
-            let num2 = Number(input[i+1]);
-
-            if (count > 0) {
-                result += operate(input[i], result, input[(i+1)]);
-            } 
-            if (count === 0) {
-                result += operate(input[i], input[(i -1)], input[(i+1)]);
-            }
-            console.log(result);
-            count++;
+            operands.push(input[i]);
             
+        }
+        else {
+            numbers.push(input[i]);
         }
         
 
         
     }
+    let result = numbers[0];
+    //parses both arrays and calculates results
+    for (let j = 0; j < operands.length; j++) {
+        nextNumber = numbers[j+1];
+
+        result = operate(operands[j], result, nextNumber);
+    }
 
     return result;
 }
-
+//creates and adds the numbers to the page
 function getButtons() {
     for (let i = 0; i < 10; i++) {
         let number = document.createElement("button");
@@ -79,7 +81,7 @@ function getButtons() {
         numbers.appendChild(number);
     }
 }
-
+//creates and adds the operators to the page
 function getOperators() {
     let plus = document.createElement("button");
     plus.innerHTML = "+";
