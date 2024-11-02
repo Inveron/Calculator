@@ -1,6 +1,10 @@
 let numbers = document.querySelector("#numbers");
 let screen = document.querySelector("#screen");
-let operators = document.querySelector("#operators");
+let operators = document.querySelector("#operatorsList");
+let row1 = document.querySelector("#row1");
+let row2 = document.querySelector("#row2");
+let row3 = document.querySelector("#row3");
+let row4 = document.querySelector("#row4");
 
 //takes whatevers on the screen and returns it as an array
 function getInput() {
@@ -78,13 +82,34 @@ function getButtons() {
             screen.innerHTML += number.innerHTML;
 
         });
-        numbers.appendChild(number);
+
+        
+
+        if (i === 1 || i === 2 || i === 3) {
+            row1.appendChild(number);
+        }
+
+        if (i === 4 || i === 5 || i === 6) {
+            row2.appendChild(number);
+        }
+
+        if (i === 7 || i === 8 || i === 9) {
+            row3.appendChild(number);
+        } 
+
+        if (i === 0) {
+            row4.appendChild(number);
+        }
+
+        
+        
     }
 }
 //creates and adds the operators to the page
 function getOperators() {
     let plus = document.createElement("button");
     plus.innerHTML = "+";
+    plus.classList.add("operatorsList")
     operators.appendChild(plus);
     plus.addEventListener('click', () => {
         screen.innerHTML += plus.innerHTML;
@@ -94,6 +119,7 @@ function getOperators() {
 
     let minus = document.createElement("button");
     minus.innerHTML = "-";
+    minus.classList.add("operatorsList");
     operators.appendChild(minus);
     minus.addEventListener('click', () => {
         screen.innerHTML += minus.innerHTML;
@@ -104,6 +130,7 @@ function getOperators() {
     let multiply = document.createElement("button");
     multiply.innerHTML = "X";
     operators.appendChild(multiply);
+    multiply.classList.add("operatorsList");
     multiply.addEventListener('click', () => {
         screen.innerHTML += multiply.innerHTML;
 
@@ -112,6 +139,7 @@ function getOperators() {
 
     let divide = document.createElement("button");
     divide.innerHTML = "/";
+    divide.classList.add("operatorsList");
     operators.appendChild(divide);
     divide.addEventListener('click', () => {
         screen.innerHTML += divide.innerHTML;
@@ -121,12 +149,14 @@ function getOperators() {
 
     let equals = document.createElement("button");
     equals.innerHTML = "=";
+    equals.classList.add("operatorsList");
     equals.addEventListener('click', () => {
         screen.innerHTML = getSolution();
     });
     operators.appendChild(equals);
 
     let clear = document.createElement("button");
+    clear.classList.add("operatorsList");
     clear.innerHTML = "CE";
     clear.addEventListener('click', () => {
         screen.innerHTML = "";
@@ -135,6 +165,7 @@ function getOperators() {
 
     let backspace = document.createElement("button");
     backspace.innerHTML = "Back";
+    backspace.classList.add("operatorsList");
     backspace.addEventListener('click', () => {
         let content = screen.innerHTML;
         
